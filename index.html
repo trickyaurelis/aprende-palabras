@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Aprende Palabras Mágicas</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <header class="header">
+      <button id="btnSound" class="btn-cute btn-sound" aria-pressed="true">🔊 Sonido: ON</button>
+      <span id="counter" class="counter" aria-hidden="true">1 / 1</span>
+      <button id="btnTeacher" class="btn-cute btn-teacher">Docente 👩‍🏫</button>
+    </header>
+
+    <main class="board">
+      <div class="nav-buttons">
+        <button id="btnPrev" class="btn-nav" aria-label="Palabra anterior">◀ Anterior</button>
+        <button id="btnNext" class="btn-nav" aria-label="Palabra siguiente">Siguiente ▶</button>
+      </div>
+
+      <div class="image-frame">
+        <div id="boxPlaceholder" class="placeholder-text" aria-hidden="true">CASA</div>
+        <img id="boxImg" style="display: none;" alt="">
+      </div>
+
+      <button id="btnHearInstruction" class="btn-hear-instruction" aria-label="Escuchar la consigna">
+        🔊 <span id="taskInstruction" class="instruction" aria-live="polite">Forma una palabra de cuatro letras</span>
+      </button>
+
+      <div class="slots-container" id="slotsContainer" role="group" aria-label="Casillas de la palabra"></div>
+
+      <div class="main-actions">
+        <button id="btnSpell" class="btn-action btn-spell">👂 Deletrear</button>
+        <button id="btnSpeak" class="btn-action btn-say-all">🎉 Escuchar todo</button>
+        <button id="btnClear" class="btn-action btn-clear">🗑️ Borrar</button>
+      </div>
+
+      <div class="result-box" id="resultBox">
+        <div class="result-title">Palabra Formada</div>
+        <div id="formedText" class="result-text" aria-live="polite"></div>
+      </div>
+    </main>
+
+    <section class="keyboard">
+      <div class="kb-header">
+        <span>Teclado Mágico ✨</span>
+        <button id="btnBackspace" class="btn-backspace" aria-label="Borrar última letra">⌫ Borrar</button>
+      </div>
+      <div id="keyboardRows" role="group" aria-label="Teclado"></div>
+    </section>
+  </div>
+
+  <div id="teacherModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="teacherModalTitle">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="teacherModalTitle">Panel del Docente</h2>
+        <button id="btnCloseModal" class="btn-close" aria-label="Cerrar panel">&times;</button>
+      </div>
+
+      <form id="addWordForm">
+        <div class="form-group">
+          <label for="inpWord">Palabra (Ej. SILLA):</label>
+          <input type="text" id="inpWord" maxlength="12" required autocomplete="off">
+          <small id="wordHint" class="field-hint"></small>
+        </div>
+        <div class="form-group">
+          <label for="inpInstruction">Consigna para el alumno:</label>
+          <input type="text" id="inpInstruction" required autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="inpFile">Subir Fotografía (Opcional):</label>
+          <input type="file" id="inpFile" accept="image/*">
+        </div>
+        <button type="submit" class="btn-save">Guardar Palabra</button>
+      </form>
+
+      <div class="backup-actions">
+        <button type="button" id="btnExport" class="btn-backup">⬇️ Exportar banco</button>
+        <label class="btn-backup btn-backup-file">
+          ⬆️ Importar banco
+          <input type="file" id="inpImport" accept="application/json" hidden>
+        </label>
+      </div>
+
+      <h3 class="saved-title">Palabras Actuales:</h3>
+      <div id="savedWordsList"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
